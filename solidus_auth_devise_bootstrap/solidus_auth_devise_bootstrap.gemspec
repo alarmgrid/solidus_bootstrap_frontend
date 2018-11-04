@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_runtime_dependency 'solidus', '>= 1.0'
-  s.add_runtime_dependency 'solidus_auth_devise', '~> 1.2'
+  s.add_runtime_dependency 'solidus_auth_devise', '>= 1.2'
   s.add_runtime_dependency 'solidus_bootstrap'
 
   s.add_development_dependency 'sqlite3'

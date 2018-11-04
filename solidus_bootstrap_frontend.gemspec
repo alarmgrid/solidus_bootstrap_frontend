@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = '>= 1.9.3'
   s.required_rubygems_version = '>= 1.8.23'
 
-  s.add_runtime_dependency 'solidus', '~> 1.0'
-  s.add_runtime_dependency 'solidus_auth_devise', '~> 1.2'
+  s.add_runtime_dependency 'solidus', '>= 1.0'
+  s.add_runtime_dependency 'solidus_auth_devise', '>= 1.0'
   s.add_runtime_dependency 'solidus_bootstrap'
   s.add_runtime_dependency 'solidus_auth_devise_bootstrap'
 end

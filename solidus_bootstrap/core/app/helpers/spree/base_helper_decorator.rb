@@ -1,4 +1,4 @@
-Spree::BaseHelper.prepend(Module.new do
+Spree::BaseHelper.class_eval do
   # Defined because Rails' current_page? helper is not working when Spree is mounted at root.
   def current_spree_page?(url)
     path = request.fullpath.gsub(/^\/\//, '/')
@@ -200,4 +200,4 @@ Spree::BaseHelper.prepend(Module.new do
       end
     end
   end
-end)
+end

@@ -14,11 +14,11 @@ Spree::BaseHelper.class_eval do
     text = text ? h(text) : Spree.t('cart')
     css_class = nil
 
-    if simple_current_order.nil? or simple_current_order.item_count.zero?
+    if current_order.nil? || current_order.item_count.zero?
       text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text}: (#{Spree.t('empty')})"
       css_class = 'empty'
     else
-      text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text}: (#{simple_current_order.item_count})  <span class='amount'>#{simple_current_order.display_total.to_html}</span>"
+      text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text}: (#{current_order.item_count})  <span class='amount'>#{current_order.display_total.to_html}</span>"
       css_class = 'full'
     end
 
@@ -140,7 +140,7 @@ Spree::BaseHelper.class_eval do
   end
 
   def display_price(product_or_variant)
-    product_or_variant.price_in(current_currency).display_price.to_html
+    product_or_variant.price_for(current_pricing_options).to_html
   end
 
   def pretty_time(time)

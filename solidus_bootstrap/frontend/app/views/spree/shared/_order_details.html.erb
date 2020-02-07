@@ -107,7 +107,7 @@
   <% end %>
 
   <tfoot id='shipment-total'>
-    <% order.shipments.group_by { |s| s.selected_shipping_rate.name }.each do |name, shipments| %>
+    <% order.shipments.group_by { |s| s.selected_shipping_rate&.name }.each do |name, shipments| %>
       <tr class="total" data-hook='shipment-row'>
         <td colspan="4" align="right" class="text-muted"><%= Spree.t(:shipping) %>: <strong><%= name %></strong></td>
         <td class="total"><span><%= Spree::Money.new(shipments.sum(&:discounted_cost), currency: order.currency).to_html %></span></td>

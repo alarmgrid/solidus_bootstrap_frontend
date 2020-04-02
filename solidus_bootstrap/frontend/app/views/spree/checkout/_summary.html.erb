@@ -1,9 +1,9 @@
-<h3><%= Spree.t(:order_summary) %></h3>
+<h3><%= I18n.t("spree.order_summary") %></h3>
 
 <table class="table" data-hook="order_summary">
   <tbody>
     <tr data-hook="item_total">
-      <td><strong><%= Spree.t(:item_total) %>:</strong></td>
+      <td><strong><%= I18n.t("spree.item_total") %>:</strong></td>
       <td><strong><%= order.display_item_total.to_html %></strong></td>
     </tr>
 
@@ -29,7 +29,7 @@
 
     <% if order.passed_checkout_step?("delivery") && order.shipments.any? %>
       <tr data-hook="shipping_total">
-        <td><%= Spree.t(:shipping_total) %>:</td>
+        <td><%= I18n.t("spree.shipping_total") %>:</td>
         <td><%= Spree::Money.new(order.shipments.to_a.sum(&:cost), currency: order.currency).to_html %></td>
       </tr>
 
@@ -58,7 +58,7 @@
     <% end %>
 
     <tr data-hook="order_total">
-      <td><strong><%= Spree.t(:order_total) %>:</strong></td>
+      <td><strong><%= I18n.t("spree.order_total") %>:</strong></td>
       <td><strong><span id='summary-order-total' class="lead text-primary"><%= order.display_total.to_html %></span></strong></td>
     </tr>
   </tbody>

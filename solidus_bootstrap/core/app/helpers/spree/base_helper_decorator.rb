@@ -11,11 +11,11 @@ Spree::BaseHelper.class_eval do
   end
 
   def link_to_cart(text = nil)
-    text = text ? h(text) : Spree.t('cart')
+    text = text ? h(text) : I18n.t('spree.cart')
     css_class = nil
 
     if current_order.nil? || current_order.item_count.zero?
-      text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text}: (#{Spree.t('empty')})"
+      text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text}: (#{I18n.t('spree.empty')})"
       css_class = 'empty'
     else
       text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text}: (#{current_order.item_count})  <span class='amount'>#{current_order.display_total.to_html}</span>"
@@ -79,14 +79,14 @@ Spree::BaseHelper.class_eval do
   def breadcrumbs(taxon, separator="&nbsp;", breadcrumb_class="breadcrumb")
     return "" if current_page?("/") || taxon.nil?
 
-    crumbs = [[Spree.t(:home), spree.root_path]]
+    crumbs = [[I18n.t("spree.home"), spree.root_path]]
 
     if taxon
-      crumbs << [Spree.t(:products), products_path]
+      crumbs << [I18n.t("spree.products"), products_path]
       crumbs += taxon.ancestors.collect { |a| [a.name, spree.nested_taxons_path(a.permalink)] } unless taxon.ancestors.empty?
       crumbs << [taxon.name, spree.nested_taxons_path(taxon.permalink)]
     else
-      crumbs << [Spree.t(:products), products_path]
+      crumbs << [I18n.t("spree.products"), products_path]
     end
 
     separator = raw(separator)
@@ -122,7 +122,7 @@ Spree::BaseHelper.class_eval do
     end
 
     countries.collect do |country|
-      country.name = Spree.t(country.iso, scope: 'country_names', default: country.name)
+      country.name = I18n.t("spree.country_names.#{country.iso}", default: country.name)
       country
     end.sort_by { |c| c.name.parameterize }
   end

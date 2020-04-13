@@ -3,25 +3,25 @@
   <% if order.has_step?("address") %>
 
     <div class="col-md-3" data-hook="order-bill-address">
-      <h4><%= Spree.t(:billing_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h4>
+      <h4><%= I18n.t("spree.billing_address") %> <%= link_to "(#{I18n.t('spree.edit')})", checkout_state_path(:address) unless @order.completed? %></h4>
       <%= render :partial => 'spree/shared/address', :locals => { :address => order.bill_address } %>
     </div>
 
     <% if order.has_step?("delivery") %>
       <div class="col-md-3" data-hook="order-ship-address">
-        <h4><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h4>
+        <h4><%= I18n.t("spree.shipping_address") %> <%= link_to "(#{I18n.t('spree.edit')})", checkout_state_path(:address) unless @order.completed? %></h4>
         <%= render :partial => 'spree/shared/address', :locals => { :address => order.ship_address } %>
       </div>
     <% end %>
 
     <% if @order.has_step?("delivery") %>
       <div class=" col-md-3">
-        <h4><%= Spree.t(:shipments) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></h4>
+        <h4><%= I18n.t("spree.shipments") %> <%= link_to "(#{I18n.t('spree.edit')})", checkout_state_path(:delivery) unless @order.completed? %></h4>
         <div class="delivery">
           <% order.shipments.each do |shipment| %>
             <div>
               <i class='fa fa-truck'></i>
-              <%= Spree.t(:shipment_details, :stock_location => shipment.stock_location.name, :shipping_method => shipment.selected_shipping_rate&.name) %>
+              <%= I18n.t("spree.shipment_details", stock_location: shipment.stock_location.name, shipping_method: shipment.selected_shipping_rate&.name) %>
             </div>
           <% end %>
         </div>
@@ -31,7 +31,7 @@
   <% end %>
 
   <div class="col-md-3">
-    <h4><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h4>
+    <h4><%= I18n.t("spree.payment_information") %> <%= link_to "(#{I18n.t('spree.edit')})", checkout_state_path(:payment) unless @order.completed? %></h4>
     <div class="payment-info">
       <% order.payments.valid.each do |payment| %>
         <%= render payment%><br/>
@@ -52,10 +52,10 @@
 
   <thead data-hook>
     <tr class="active" data-hook="order_details_line_items_headers">
-      <th colspan="2"><%= Spree.t(:item) %></th>
-      <th class="price"><%= Spree.t(:price) %></th>
-      <th class="qty"><%= Spree.t(:qty) %></th>
-      <th class="total"><span><%= Spree.t(:total) %></span></th>
+      <th colspan="2"><%= I18n.t("spree.item") %></th>
+      <th class="price"><%= I18n.t("spree.price") %></th>
+      <th class="qty"><%= I18n.t("spree.qty") %></th>
+      <th class="total"><span><%= I18n.t("spree.total") %></span></th>
     </tr>
   </thead>
 
@@ -82,14 +82,14 @@
   </tbody>
   <tfoot id="order-total" data-hook="order_details_total">
     <tr class="warning total">
-      <td colspan="4" align="right"><b><%= Spree.t(:order_total) %>:</b></td>
+      <td colspan="4" align="right"><b><%= I18n.t("spree.order_total") %>:</b></td>
       <td class="total"><span id="order_total" class="lead text-primary"><%= @order.display_total.to_html %></span></td>
     </tr>
   </tfoot>
 
   <tfoot id="subtotal" data-hook="order_details_subtotal">
     <tr class="total" id="subtotal-row">
-      <td colspan="4" align="right"><b><%= Spree.t(:subtotal) %>:</b></td>
+      <td colspan="4" align="right"><b><%= I18n.t("spree.subtotal") %>:</b></td>
       <td class="total"><span><%= @order.display_item_total.to_html %></span></td>
     </tr>
   </tfoot>
@@ -98,7 +98,7 @@
       <tfoot id="price-adjustments" data-hook="order_details_price_adjustments">
         <% order.all_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
          <tr class="total">
-           <td colspan="4"><%= Spree.t(:promotion) %>: <strong><%= label %></strong></td>
+           <td colspan="4"><%= I18n.t("spree.promotion") %>: <strong><%= label %></strong></td>
            <td class="total"><span><%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency) %></span></td>
          </tr>
        <% end %>
@@ -109,7 +109,7 @@
   <tfoot id='shipment-total'>
     <% order.shipments.group_by { |s| s.selected_shipping_rate&.name }.each do |name, shipments| %>
       <tr class="total" data-hook='shipment-row'>
-        <td colspan="4" align="right" class="text-muted"><%= Spree.t(:shipping) %>: <strong><%= name %></strong></td>
+        <td colspan="4" align="right" class="text-muted"><%= I18n.t("spree.shipping") %>: <strong><%= name %></strong></td>
         <td class="total"><span><%= Spree::Money.new(shipments.sum(&:discounted_cost), currency: order.currency).to_html %></span></td>
       </tr>
     <% end %>
@@ -119,7 +119,7 @@
     <tfoot id="tax-adjustments" data-hook="order_details_tax_adjustments">
       <% order.all_adjustments.tax.group_by(&:label).each do |label, adjustments| %>
         <tr class="total">
-          <td colspan="4" align="right" class="text-muted"><%= Spree.t(:tax) %>: <strong><%= label %></strong></td>
+          <td colspan="4" align="right" class="text-muted"><%= I18n.t("spree.tax") %>: <strong><%= label %></strong></td>
           <td class="total"><span><%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency) %></span></td>
         </tr>
       <% end %>

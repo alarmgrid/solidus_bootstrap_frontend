@@ -1,6 +1,6 @@
 <div class="panel panel-default" id="payment" data-hook>
   <div class="panel-heading">
-    <h3 class="panel-title"><%= Spree.t(:payment_information) %></h3>
+    <h3 class="panel-title"><%= I18n.t("spree.payment_information") %></h3>
   </div>
   <div class="panel-body" data-hook="checkout_payment_step">
 
@@ -39,7 +39,7 @@
       <li class="list-group-item">
         <label>
           <%= radio_button_tag "order[payments_attributes][][payment_method_id]", method.id, method == @order.available_payment_methods.first %>
-          <%= Spree.t(method.name, :scope => :payment_methods, :default => method.name) %>
+          <%= I18n.t("spree.payment_methods.#{method.name}", default: method.name) %>
         </label>
       </li>
       <% end %>
@@ -63,6 +63,6 @@
 </div>
 
 <div class="well text-right form-buttons" data-hook="buttons">
-  <%= submit_tag Spree.t(:save_and_continue), class: 'btn btn-lg btn-success primary' %>
+  <%= submit_tag I18n.t("spree.save_and_continue"), class: 'btn btn-lg btn-success primary' %>
   <script>Spree.disableSaveOnClick();</script>
 </div>

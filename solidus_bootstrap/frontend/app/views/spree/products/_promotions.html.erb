@@ -1,7 +1,7 @@
 <% promotions = @product.possible_promotions %>
 <% if promotions.any? %>
   <div id="promotions">
-    <h3><%= Spree.t(:promotions) %></h3>
+    <h3><%= I18n.t("spree.promotions") %></h3>
     <% promotions.each do |promotion| %>
     <div class="well well-sm">
       <h4><%= promotion.name %></h4>

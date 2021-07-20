@@ -46,7 +46,15 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
       str_addr = 'bill_address'
       select 'United States', from: "order_#{str_addr}_attributes_country_id"
-      %w(firstname lastname address1 city zipcode phone).each do |field|
+
+      if ::Spree.solidus_gem_version < Gem::Version.new('3.0.0')
+        fill_in "order_#{str_addr}_attributes_firstname", with: address.firstname
+        fill_in "order_#{str_addr}_attributes_lastname", with: address.lastname
+      else
+        fill_in "order_#{str_addr}_attributes_name", with: address.name
+      end
+
+      %w(address1 city zipcode phone).each do |field|
         fill_in "order_#{str_addr}_attributes_#{field}", with: "#{address.send(field)}"
       end
       select "#{address.state.name}", from: "order_#{str_addr}_attributes_state_id"
@@ -76,7 +84,15 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
       str_addr = 'bill_address'
       select 'United States', from: "order_#{str_addr}_attributes_country_id"
-      %w(firstname lastname address1 city zipcode phone).each do |field|
+
+      if ::Spree.solidus_gem_version < Gem::Version.new('3.0.0')
+        fill_in "order_#{str_addr}_attributes_firstname", with: address.firstname
+        fill_in "order_#{str_addr}_attributes_lastname", with: address.lastname
+      else
+        fill_in "order_#{str_addr}_attributes_name", with: address.name
+      end
+
+      %w(address1 city zipcode phone).each do |field|
         fill_in "order_#{str_addr}_attributes_#{field}", with: "#{address.send(field)}"
       end
       select "#{address.state.name}", from: "order_#{str_addr}_attributes_state_id"
@@ -117,7 +133,15 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
       str_addr = 'bill_address'
       select 'United States', from: "order_#{str_addr}_attributes_country_id"
-      %w(firstname lastname address1 city zipcode phone).each do |field|
+
+      if ::Spree.solidus_gem_version < Gem::Version.new('3.0.0')
+        fill_in "order_#{str_addr}_attributes_firstname", with: address.firstname
+        fill_in "order_#{str_addr}_attributes_lastname", with: address.lastname
+      else
+        fill_in "order_#{str_addr}_attributes_name", with: address.name
+      end
+
+      %w(address1 city zipcode phone).each do |field|
         fill_in "order_#{str_addr}_attributes_#{field}", with: "#{address.send(field)}"
       end
       select "#{address.state.name}", from: "order_#{str_addr}_attributes_state_id"
@@ -146,7 +170,15 @@ RSpec.feature 'Checkout', :js, type: :feature do
 
       str_addr = 'bill_address'
       select 'United States', from: "order_#{str_addr}_attributes_country_id"
-      %w(firstname lastname address1 city zipcode phone).each do |field|
+
+      if ::Spree.solidus_gem_version < Gem::Version.new('3.0.0')
+        fill_in "order_#{str_addr}_attributes_firstname", with: address.firstname
+        fill_in "order_#{str_addr}_attributes_lastname", with: address.lastname
+      else
+        fill_in "order_#{str_addr}_attributes_name", with: address.name
+      end
+
+      %w(address1 city zipcode phone).each do |field|
         fill_in "order_#{str_addr}_attributes_#{field}", with: "#{address.send(field)}"
       end
       select "#{address.state.name}", from: "order_#{str_addr}_attributes_state_id"

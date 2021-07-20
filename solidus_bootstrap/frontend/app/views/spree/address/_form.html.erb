@@ -1,13 +1,20 @@
 <% address_id = address_type.chars.first %>
 <div class="inner" data-hook=<%="#{address_type}_inner" %>>
-  <p class="field" id=<%="#{address_id}firstname" %>>
-    <%= form.label :firstname, I18n.t("spree.first_name") %><span class="required">*</span><br />
-    <%= form.text_field :firstname, :class => 'form-control required' %>
-  </p>
-  <p class="field" id=<%="#{address_id}lastname" %>>
-    <%= form.label :lastname, I18n.t("spree.last_name") %><span class="required">*</span><br />
-    <%= form.text_field :lastname, :class => 'form-control required' %>
-  </p>
+  <% if ::Spree.solidus_gem_version >= Gem::Version.new('3.0.0') %>
+    <p class="field" id=<%="#{address_id}name" %>>
+    <%= form.label :name, I18n.t("spree.name") %><span class="required">*</span><br />
+    <%= form.text_field :name, :class => 'form-control required' %>
+    </p>
+  <% else %>
+    <p class="field" id=<%="#{address_id}firstname" %>>
+      <%= form.label :firstname, I18n.t("spree.first_name") %><span class="required">*</span><br />
+      <%= form.text_field :firstname, :class => 'form-control required' %>
+    </p>
+    <p class="field" id=<%="#{address_id}lastname" %>>
+      <%= form.label :lastname, I18n.t("spree.last_name") %><span class="required">*</span><br />
+      <%= form.text_field :lastname, :class => 'form-control required' %>
+    </p>
+  <% end %>
   <% if Spree::Config[:company] %>
     <p class="field" id=<%="#{address_id}company" %>>
       <%= form.label :company, I18n.t("spree.company") %><br />

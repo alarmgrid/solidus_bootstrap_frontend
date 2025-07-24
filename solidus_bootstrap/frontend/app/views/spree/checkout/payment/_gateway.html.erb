@@ -4,7 +4,7 @@
 
   <p class="field">
     <%= label_tag "name_on_card_#{payment_method.id}", I18n.t("spree.name_on_card") %><span class="required">*</span><br />
-    <%= text_field_tag "#{param_prefix}[name]", "#{@order.billing_firstname} #{@order.billing_lastname}", { id: "name_on_card_#{payment_method.id}", :class => 'form-control required'} %>
+    <%= text_field_tag "#{param_prefix}[name]", "#{@order.billing_name}", { id: "name_on_card_#{payment_method.id}", :class => 'form-control required'} %>
   </p>
 
   <p class="field" data-hook="card_number">

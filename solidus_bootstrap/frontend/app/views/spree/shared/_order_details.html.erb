@@ -1,20 +1,20 @@
 <div class="row steps-data">
 
-  <% if order.has_step?("address") %>
+  <% if order.has_checkout_step?("address") %>
 
     <div class="col-md-3" data-hook="order-bill-address">
       <h4><%= I18n.t("spree.billing_address") %> <%= link_to "(#{I18n.t('spree.edit')})", checkout_state_path(:address) unless @order.completed? %></h4>
       <%= render :partial => 'spree/shared/address', :locals => { :address => order.bill_address } %>
     </div>
 
-    <% if order.has_step?("delivery") %>
+    <% if order.has_checkout_step?("delivery") %>
       <div class="col-md-3" data-hook="order-ship-address">
         <h4><%= I18n.t("spree.shipping_address") %> <%= link_to "(#{I18n.t('spree.edit')})", checkout_state_path(:address) unless @order.completed? %></h4>
         <%= render :partial => 'spree/shared/address', :locals => { :address => order.ship_address } %>
       </div>
     <% end %>
 
-    <% if @order.has_step?("delivery") %>
+    <% if @order.has_checkout_step?("delivery") %>
       <div class=" col-md-3">
         <h4><%= I18n.t("spree.shipments") %> <%= link_to "(#{I18n.t('spree.edit')})", checkout_state_path(:delivery) unless @order.completed? %></h4>
         <div class="delivery">

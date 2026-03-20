@@ -15,11 +15,11 @@ gem 'solidus_frontend', github: solidus_frontend_git, branch: branch
 # Needed to help Bundler figure out how to resolve dependencies,
 # otherwise it takes forever to resolve them.
 # See https://github.com/bundler/bundler/issues/6677
-gem "rails", "~> 7.0"
+gem "rails", "~> 8.0"
 gem "coffee-script"
 
 # Provides basic authentication functionality for testing parts of your engine
-gem "solidus_auth_devise"
+gem "solidus_auth_devise", git: "git@github.com:solidusio/solidus_auth_devise.git"
 
 case ENV["DB"]
 when "mysql"
@@ -36,9 +36,9 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara", "~> 3.30", require: "capybara/rspec"
+  gem "capybara", require: "capybara/rspec"
   gem "selenium-webdriver"
-  gem "database_cleaner", "~> 1.3"
+  gem "database_cleaner"
   gem "email_spec"
   gem "factory_bot_rails"
   gem "ffaker"
@@ -52,7 +52,7 @@ group :test do
   gem "rspec-retry"
   gem "simplecov"
   gem "webmock"
-  gem "poltergeist", "~> 1.8"
+  gem "poltergeist"
   gem "timecop"
   gem "with_model"
   gem "jquery-validation-rails"

@@ -50,7 +50,7 @@ fi
 cd ./sandbox
 cat <<RUBY >> Gemfile
 gem 'solidus', github: 'solidusio/solidus', branch: '$BRANCH'
-gem 'solidus_auth_devise', '>= 2.1.0'
+gem "solidus_auth_devise", git: "git@github.com:solidusio/solidus_auth_devise.git"
 gem 'rails-i18n'
 gem 'solidus_i18n'
 
@@ -62,6 +62,13 @@ group :test, :development do
   end
 end
 RUBY
+
+mkdir -p app/assets/config
+cat <<MANIFEST > app/assets/config/manifest.js
+//= link_tree ../images
+//= link_directory ../javascripts .js
+//= link_directory ../stylesheets .css
+MANIFEST
 
 unbundled bundle install --gemfile Gemfile
 
